@@ -11,8 +11,15 @@
 
     <packaging>pom</packaging>
 
+    <properties>
+        <maven.compiler.source>12</maven.compiler.source>
+        <maven.compiler.target>12</maven.compiler.target>
+    </properties>
+
     <modules>
         <module>monolith</module>
         <module>domain</module>
+        <module>app</module>
+        <module>adapters</module>
     </modules>
 </project>

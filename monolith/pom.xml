@@ -8,14 +8,16 @@
         <version>2.3.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.kruczek</groupId>
-    <artifactId>mailsender</artifactId>
+    <artifactId>monolith</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>mailsender</name>
+    <name>monolith</name>
     <description>Service for mail communication</description>
 
     <properties>
-        <java.version>11</java.version>
+        <maven.compiler.source>12</maven.compiler.source>
+        <maven.compiler.target>12</maven.compiler.target>
     </properties>
 
     <dependencies>
