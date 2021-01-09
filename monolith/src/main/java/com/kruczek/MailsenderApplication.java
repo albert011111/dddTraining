@@ -1,4 +1,4 @@
-package com.kruczek.mailsender;
+package com.kruczek;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
