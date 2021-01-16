@@ -6,15 +6,18 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-interface SqlQueryEmailRepository extends EmailQueryRepository, MongoRepository<EmailSnapshot, String> {
-}
-
+@SuppressWarnings("unchecked")
 interface SqlEmailRepository extends MongoRepository<EmailSnapshot, String> {
 	EmailSnapshot save(EmailSnapshot snapshot);
 }
 
+interface SqlQueryEmailRepository extends EmailQueryRepository, MongoRepository<EmailSnapshot, String> {
+}
+
 @Repository
 class EmailRepositoryImpl implements EmailRepository {
+	private static final String NOT_IMPLEMENTED_YET = "not implemented yet :(";
+
 	private final SqlQueryEmailRepository sqlQueryEmailRepository;
 	private final SqlEmailRepository sqlEmailRepository;
 
@@ -30,16 +33,16 @@ class EmailRepositoryImpl implements EmailRepository {
 
 	@Override
 	public void delete(String emailId) {
-
+		throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);
 	}
 
 	@Override
 	public Optional<Email> findById(String emailId) {
-		return Optional.empty();
+		throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);
 	}
 
 	@Override
 	public List<Email> findAllByFromAddress(String fromAddress) {
-		return null;
+		throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);
 	}
 }

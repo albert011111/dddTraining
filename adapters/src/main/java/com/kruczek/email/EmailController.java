@@ -20,12 +20,13 @@ class EmailController {
 	private final SqlQueryEmailRepository sqlQueryEmailRepository;
 
 	EmailController(EmailRepository emailRepository, SqlQueryEmailRepository sqlQueryEmailRepository) {
+
 		this.emailFacade = new EmailFacade(emailRepository);
 		this.sqlQueryEmailRepository = sqlQueryEmailRepository;
 	}
 
 	//todo Add request body validation. Add excepttion handling
-	@PostMapping(value = "email")
+	@PostMapping(value = "/email")
 	ResponseEntity<EmailDto> sendEmail(@RequestBody EmailDto emailBody) {
 		final EmailDto emailDto = emailFacade.saveEmail(emailBody);
 

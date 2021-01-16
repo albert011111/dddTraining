@@ -2,8 +2,6 @@ package com.kruczek.email;
 
 import java.util.UUID;
 
-import lombok.extern.slf4j.Slf4j;
-
 class EmailInitializer {
 	private final EmailRepository emailRepository;
 	private final EmailQueryRepository emailQueryRepository;
