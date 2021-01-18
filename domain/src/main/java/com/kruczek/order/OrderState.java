@@ -3,7 +3,7 @@ package com.kruczek.order;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-enum OrderState {
+public enum OrderState {
 	NEW("new"),
 	IN_PROGRESS("inProgress"),
 	COMPLETED("completed"),

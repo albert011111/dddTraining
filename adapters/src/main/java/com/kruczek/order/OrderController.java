@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kruczek.DomainEventPublisher;
+
+//todo add in headers version of API
 @RequestMapping(value = "/v1/orders")
 @RestController
 class OrderController {
 	private final OrderFacade orderFacade;
 
-	OrderController(OrderRepository orderRepository) {
-		this.orderFacade = new OrderFacade(orderRepository);
+	OrderController(OrderRepository orderRepository, DomainEventPublisher domainEvent) {
+		this.orderFacade = new OrderFacade(orderRepository, domainEvent);
 	}
 
 	//todo Add request body validation. Add excepttion handling

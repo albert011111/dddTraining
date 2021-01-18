@@ -1,19 +1,35 @@
 package com.kruczek.order;
 
+import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.javamoney.moneta.Money;
 
+import com.kruczek.DomainEventPublisher;
+
+import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Builder
 class OrderFacade {
 	private final OrderRepository orderRepository;
+	private final DomainEventPublisher eventPublisher;
 
-	OrderFacade(OrderRepository orderRepository) {
+	public OrderFacade(OrderRepository orderRepository, DomainEventPublisher eventPublisher) {
 		this.orderRepository = orderRepository;
+		this.eventPublisher = eventPublisher;
 	}
 
 	public OrderDto saveOrder(OrderDto orderDto) {
-		return toOrderDto(orderRepository.save(OrderFactory.fromDto(orderDto)));
+		final OrderDto savedOrder = toOrderDto(orderRepository.save(OrderFactory.fromDto(orderDto)));
+		final OrderEvent event = new OrderEvent(Instant.now(), savedOrder.getId(), OrderState.fromText(orderDto.getState()));
+		eventPublisher.publish(event);
+
+		log.debug("order has been saved id:{}, event published{}", savedOrder.getId(), event.toString());
+
+		return savedOrder;
 	}
 
 	private OrderDto toOrderDto(Order order) {
