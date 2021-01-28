@@ -20,7 +20,8 @@
     <properties>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
-        <spring-cloud.version>2.2.6</spring-cloud.version>
+
+        <spring-cloud.version>2020.0.0</spring-cloud.version>
 
     </properties>
 
@@ -112,4 +113,16 @@
         </dependency>
 
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

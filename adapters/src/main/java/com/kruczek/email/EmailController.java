@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kruczek.email.dto.EmailDto;
+import com.kruczek.infrastructure.clients.FileGeneratorClient;
 
 @RequestMapping(value = "/v1/emails")
 @RestController
@@ -19,10 +20,12 @@ class EmailController {
 	private final EmailFacade emailFacade;
 	private final SqlQueryEmailRepository sqlQueryEmailRepository;
 
-	EmailController(EmailRepository emailRepository, SqlQueryEmailRepository sqlQueryEmailRepository) {
+	EmailController(EmailRepository emailRepository,
+			SqlQueryEmailRepository sqlQueryEmailRepository,
+			FileGeneratorClient fileGeneratorClient) {
 
-		this.emailFacade = new EmailFacade(emailRepository);
 		this.sqlQueryEmailRepository = sqlQueryEmailRepository;
+		this.emailFacade = new EmailFacade(emailRepository, fileGeneratorClient);
 	}
 
 	//todo Add request body validation. Add excepttion handling
