@@ -3,7 +3,6 @@ package com.kruczek.order;
 import java.util.Set;
 import java.util.UUID;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,10 +13,8 @@ class OrderDtoTest {
 	void shouldCreateOrderDto_whenArgumentsProvided() {
 		//given
 		final String id = UUID.randomUUID().toString();
-		final String state = OrderState.NEW.getText();
-		final Set<ItemDto> items = Set.of();
 		//when
-		final OrderDto orderDto = OrderDto.create(id, state, items);
+		final OrderDto orderDto = OrderTestCommons.createOrder(id, OrderState.NEW, Set.of());
 		//then
 		assertThat(orderDto)
 				.isNotNull()

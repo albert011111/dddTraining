@@ -14,14 +14,13 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class OrderDto {
-	static OrderDto create(String id, String state, Set<ItemDto> items) {
-		Objects.requireNonNull(state, "state can't be null");
-
-		return new OrderDto(id, state, items);
-	}
-
 	private String id;
 	private String state;
 	private Set<ItemDto> items;
+
+	static OrderDto create(String id, String state, Set<ItemDto> items) {
+		Objects.requireNonNull(state, "state can't be null");
+		return new OrderDto(id, state, items);
+	}
 
 }

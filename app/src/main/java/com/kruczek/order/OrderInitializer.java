@@ -12,11 +12,9 @@ class OrderInitializer {
 		this.orderQueryRepository = orderQueryRepository;
 	}
 
-	void init(){
-		if (orderQueryRepository.count() == 0){
-
+	void init() {
+		if (orderQueryRepository.count() == 0) {
 			Order order = Order.restore(new OrderSnapshot(UUID.randomUUID().toString(), OrderState.NEW, Collections.emptySet()));
-
 			orderRepository.save(order);
 		}
 	}

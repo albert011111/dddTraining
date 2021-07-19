@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kruczek.DomainEventPublisher;
+import com.kruczek.FeignClient;
 import com.kruczek.infrastructure.clients.FileGeneratorClient;
 
 //todo add in headers version of API
@@ -16,7 +17,7 @@ import com.kruczek.infrastructure.clients.FileGeneratorClient;
 @RestController
 class OrderController {
 	private final OrderFacade orderFacade;
-	private final FileGeneratorClient fileGeneratorClient;
+	private final FeignClient fileGeneratorClient;
 
 	OrderController(OrderRepository orderRepository, DomainEventPublisher domainEvent, FileGeneratorClient fileGeneratorClient) {
 		this.fileGeneratorClient = fileGeneratorClient;

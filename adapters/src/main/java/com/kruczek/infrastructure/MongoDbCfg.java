@@ -14,14 +14,6 @@ class MongoDbCfg {
 	@Value("${spring.data.mongodb.uri}")
 	private String mongoDbURI;
 
-//	@Bean
-//	MappingMongoConverter mongoConverter(MongoDatabaseFactory mongoDatabaseFactory, MongoMappingContext mongoMappingContext) {
-//		DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDatabaseFactory);
-//		MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
-//		mongoConverter.setMapKeyDotReplacement("#");
-//		return mongoConverter;
-//	}
-
 	@Bean
 	MongoTemplate mongoTemplate() {
 		final MongoTemplate mongoTemplate = new MongoTemplate(mongoDatabaseFactory());

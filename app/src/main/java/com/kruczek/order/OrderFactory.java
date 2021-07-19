@@ -16,6 +16,11 @@ class OrderFactory {
 				.orElseThrow(() -> new IllegalArgumentException("orderDto can't be null"));
 	}
 
+	static OrderDto toOrderDto(Order order) {
+		final var snapshot = order.getSnapshot();
+		return OrderDto.create(snapshot.getId(), snapshot.getState().getText(), toItemDtos(snapshot));
+	}
+
 	private static Order toOrder(OrderDto dto) {
 		return Order.restore(new OrderSnapshot(dto.getId(), OrderState.fromText(dto.getState()), toItemSnapshots(dto)));
 	}
@@ -30,6 +35,20 @@ class OrderFactory {
 	private static ItemSnapshot toSnapshot(ItemDto itemDto) {
 		return new ItemSnapshot(itemDto.getId(), Money.of(new BigDecimal(itemDto.getTotalPrice()), itemDto.getCurrency()));
 	}
+
+	private static Set<ItemDto> toItemDtos(OrderSnapshot snapshot) {
+		return snapshot.getItems().stream()
+				.map(OrderFactory::toItemDto)
+				.collect(Collectors.toSet());
+	}
+
+	private static ItemDto toItemDto(ItemSnapshot snapshot) {
+		final Money price = snapshot.getTotalPrice();
+		return ItemDto.create(snapshot.getId(),
+				price.getNumberStripped().toString(),
+				price.getCurrency().toString());
+	}
+
 
 	private OrderFactory() {
 	}
